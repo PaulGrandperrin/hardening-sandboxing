@@ -1,0 +1,62 @@
+# pbuilder specific vars 
+DISTRIBUTION=buster
+BUILDRESULT=debs
+BUILDPLACE=builder/build
+BASEPATH=builder/base.cow 
+APTCACHE="$(pwd)/builder/aptcache"
+MIRRORSITE=http://deb.debian.org/debian/
+OTHERMIRROR="deb http://security.debian.org/ buster/updates main|deb http://deb.debian.org/debian buster-updates main|deb http://http.debian.net/debian buster-backports main"
+HOOKDIR=hooks
+EATMYDATA=yes
+DEBBUILDOPTS="--build=binary" # Builds the architecture specific binary packages
+EXTRAPACKAGES="clang-8 lld-8 llvm-8-dev"
+#APTCONFDIR=""
+#NO_COWDANCER_UPDATE=1 
+#DEBOOTSTRAPOPTS="" 
+
+# pbuilder undocumented vars...
+BIN_NMU=yes
+BINNMU_MESSAGE="rebuild with clang and hardening options"
+BINNMU_MAINTAINER="Paul Grandperrin <paul.grandperrin@gmail.com>"
+BINNMU_VERSION="hardened1"
+#BINARY_ARCH=binary
+
+# dpkg-buildpackage specific vars
+#export DEB_VENDOR ?
+export DEB_BUILD_PROFILES="nocheck nodoc noudeb nobiarch"
+export DEB_BUILD_OPTIONS="nocheck nodoc hardening=+all"
+
+# Toolchain selection
+export CC=clang
+export CPP=clang-cpp
+export CXX=clang++
+export LD=lld
+
+# Toolchain flags
+FLAGS="$FLAGS -flto -fPIE -fPIC -pie"
+
+# Safe Stack
+FLAGS="$FLAGS -fsanitize=safe-stack"
+
+# CFI
+#FLAGS="$FLAGS -fvisibility=hidden" # if it fails, use default
+FLAGS="$FLAGS -fvisibility=default"
+FLAGS="$FLAGS -fsanitize=cfi-cast-strict"
+FLAGS="$FLAGS -fsanitize=cfi-derived-cast"
+FLAGS="$FLAGS -fsanitize=cfi-unrelated-cast"
+FLAGS="$FLAGS -fsanitize=cfi-nvcall"
+FLAGS="$FLAGS -fsanitize=cfi-vcall"
+FLAGS="$FLAGS -fsanitize=cfi-icall" # if it fails, try with -fsanitize-cfi-icall-generalize-pointers (incompat with cross-dso) and -fno-sanitize-cfi-canonical-jump-tables or replace with -fsanitize=function (slower, included in -fsanitize=undefined)
+FLAGS="$FLAGS -fsanitize=cfi-mfcall"
+
+# UBSAN
+FLAGS="$FLAGS -fsanitize-trap=integer"
+FLAGS="$FLAGS -fsanitize-trap=nullability"
+FLAGS="$FLAGS -fsanitize-trap=function"
+FLAGS="$FLAGS -fsanitize-trap=bounds"
+FLAGS="$FLAGS -fsanitize-trap=pointer-overflow"
+
+# customize dpkg-buildflags
+export DEB_CFLAGS_APPEND="$FLAGS"
+export DEB_CXXFLAGS_APPEND="$FLAGS"
+export DEB_LDFLAGS_APPEND="$FLAGS"
