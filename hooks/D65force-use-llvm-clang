@@ -25,7 +25,7 @@ ln -sf /usr/bin/llvm-ranlib-8  /usr/bin/ranlib
 ln -sf /usr/bin/llvm-objcopy-8 /usr/bin/objcopy
 ln -sf /usr/bin/llvm-objcopy-8 /usr/bin/strip
 ln -sf /usr/bin/llvm-nm-8      /usr/bin/nm
-ln -sf /usr/bin/llvm-objdump-8 /usr/bin/objdump
+#ln -sf /usr/bin/llvm-objdump-8 /usr/bin/objdump
 ln -sf /usr/bin/llvm-as-8      /usr/bin/as
 
 exit 0

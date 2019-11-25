@@ -1,6 +1,21 @@
 #!/bin/sh
 set -xe
 
+build_package () {
+  rm -rf sources
+  mkdir -p sources
+  cd sources
+  apt source $1
+  cd ..
+
+  cowbuilder build --configfile pbuilderrc sources/*.dsc
+
+  rm -rf sources
+}
+
+
+
+
 # dpkg-buildpackage specific vars
 #export DEB_VENDOR ?
 export DEB_BUILD_PROFILES="nocheck nodoc noudeb nobiarch"
@@ -44,41 +59,19 @@ ub_default="$ub_android $ub_int $ub_null $ub_bound"
 
 # PACKAGES
 
-FLAGS="$st $ub_default"
-export DEB_CFLAGS_APPEND="$FLAGS"
-export DEB_CXXFLAGS_APPEND="$FLAGS"
-export DEB_LDFLAGS_APPEND="$FLAGS"
-./build_package.sh test
-exit 0
-
-# lua lz4 lzma sodium ilibstemmer libwrap ssl-cert
-
-FLAGS="$st $ub_default $ub_func"
-export DEB_CFLAGS_APPEND="$FLAGS"
-export DEB_CXXFLAGS_APPEND="$FLAGS"
-export DEB_LDFLAGS_APPEND="$FLAGS"
-./build_package.sh openssl
-
 FLAGS="$st $ub_default" # TODO try to enable some CFI
 export DEB_CFLAGS_APPEND="$FLAGS"
 export DEB_CXXFLAGS_APPEND="$FLAGS"
 export DEB_LDFLAGS_APPEND="$FLAGS"
-./build_package.sh zlib
-
-FLAGS="$st $ub_default" # TODO try to enable some CFI
-export DEB_CFLAGS_APPEND="$FLAGS"
-export DEB_CXXFLAGS_APPEND="$FLAGS"
-export DEB_LDFLAGS_APPEND="$FLAGS"
-./build_package.sh bzip2
-
-FLAGS="$st $ub_default" # TODO try to enable some CFI
-export DEB_CFLAGS_APPEND="$FLAGS"
-export DEB_CXXFLAGS_APPEND="$FLAGS"
-export DEB_LDFLAGS_APPEND="$FLAGS"
-./build_package.sh icu
+build_package openssl
+build_package lz4
+build_package bzip2
+build_package icu
+build_package lua5.3
 
 FLAGS="$st $cfi $ub_default"
 export DEB_CFLAGS_APPEND="$FLAGS"
 export DEB_CXXFLAGS_APPEND="$FLAGS"
 export DEB_LDFLAGS_APPEND="$FLAGS"
-./build_package.sh opensmtpd
+build_package opensmtpd
+build_package lzma
