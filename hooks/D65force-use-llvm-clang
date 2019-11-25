@@ -20,6 +20,7 @@ ln -sf /usr/bin/clang-cpp      /usr/bin/x86_64-linux-gnu-cpp
 ln -sf /usr/bin/lld            /usr/bin/ld
 ln -sf /usr/bin/lld            /usr/bin/x86_64-linux-gnu-ld
 
+ln -sf /usr/bin/llvm-ar-8      /usr/bin/ar
 ln -sf /usr/bin/llvm-ranlib-8  /usr/bin/ranlib
 ln -sf /usr/bin/llvm-objcopy-8 /usr/bin/objcopy
 ln -sf /usr/bin/llvm-objcopy-8 /usr/bin/strip

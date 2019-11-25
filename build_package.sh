@@ -1,6 +1,7 @@
 #!/bin/sh
 set -xe
 
+rm -rf sources
 mkdir -p sources
 cd sources
 apt source $1
