@@ -1,0 +1,15 @@
+[Match]
+Name=microvm-*
+Driver=tun
+
+[Network]
+# Default to using a /28 prefix, giving up to 13 addresses per container.
+Address=0.0.0.0/28
+DHCPServer=yes
+IPMasquerade=yes
+LLDP=yes
+EmitLLDP=customer-bridge
+
+[DHCPServer]
+EmitDNS=true
+DNS=8.8.8.8
