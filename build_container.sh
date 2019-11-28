@@ -9,7 +9,7 @@ systemctl enable machines.target
 #echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.d/nspawn.conf
 systemctl restart systemd-sysctl.service
 systemctl enable systemd-networkd
-cp network/80-container-ve.network /etc/systemd/network/ # override default conf to remove LinkLocalAddressing which conflicts with GCP internal DNS address #sad
+cp container/80-container-ve.network /etc/systemd/network/ # override default conf to remove LinkLocalAddressing which conflicts with GCP internal DNS address #sad
 systemctl restart systemd-networkd
 
 # params
@@ -37,6 +37,6 @@ systemd-nspawn -D $container systemctl enable systemd-networkd.service
 mkdir -p /etc/systemd/nspawn/
 #echo "[Network]" > /etc/systemd/nspawn/$name.nspawn
 #echo "Zone=$name" >> /etc/systemd/nspawn/$name.nspawn
-cp network/80-container-host0.network $container/etc/systemd/network/ # override default conf to remove LinkLocalAddressing which conflicts with GCP internal DNS address #sad
+cp container/80-container-host0.network $container/etc/systemd/network/ # override default conf to remove LinkLocalAddressing which conflicts with GCP internal DNS address #sad
 systemctl enable systemd-nspawn@$name.service
 systemctl start systemd-nspawn@$name.service

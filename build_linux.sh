@@ -5,7 +5,7 @@ if [ -d linux-hardened ]; then
   cd linux-hardened
   git fetch
 else
-  git clone https:////github.com/anthraxx/linux-hardened.git
+  git clone https://github.com/anthraxx/linux-hardened.git
   cd linux-hardened
 fi
 
