@@ -1,3 +1,4 @@
+# from linux hardened
 CONFIG_AIO=n
 CONFIG_ARCH_MMAP_RND_BITS=32
 CONFIG_ARCH_MMAP_RND_COMPAT_BITS=16
@@ -34,3 +35,112 @@ CONFIG_SLAB_HARDENED=y
 CONFIG_SLAB_SANITIZE=y
 CONFIG_SLAB_SANITIZE_VERIFY=y
 CONFIG_X86_PTDUMP_CORE=y
+
+# from https://kernsec.org/wiki/index.php/Kernel_Self_Protection_Project/Recommended_Settings
+
+# Report BUG() conditions and kill the offending process.
+CONFIG_BUG=y
+
+# Make sure kernel page tables have safe permissions.
+CONFIG_STRICT_KERNEL_RWX=y
+
+# Report any dangerous memory permissions (not available on all archs).
+CONFIG_DEBUG_WX=y
+
+# Use -fstack-protector-strong (gcc 4.9+) for best stack canary coverage.
+# Prior to v4.18, these are:
+#  CONFIG_CC_STACKPROTECTOR=y
+#  CONFIG_CC_STACKPROTECTOR_STRONG=y
+CONFIG_STACKPROTECTOR=y
+CONFIG_STACKPROTECTOR_STRONG=y
+
+# Do not allow direct physical memory access (but if you must have it, at least enable STRICT mode...)
+# CONFIG_DEVMEM is not set
+CONFIG_STRICT_DEVMEM=y
+CONFIG_IO_STRICT_DEVMEM=y
+
+# Provides some protections against SYN flooding.
+CONFIG_SYN_COOKIES=y
+
+# Perform additional validation of various commonly targeted structures.
+CONFIG_DEBUG_CREDENTIALS=y
+CONFIG_DEBUG_NOTIFIERS=y
+CONFIG_DEBUG_LIST=y
+CONFIG_DEBUG_SG=y
+CONFIG_BUG_ON_DATA_CORRUPTION=y
+CONFIG_SCHED_STACK_END_CHECK=y
+
+# Provide userspace with seccomp BPF API for syscall attack surface reduction.
+CONFIG_SECCOMP=y
+CONFIG_SECCOMP_FILTER=y
+
+# Provide userspace with ptrace ancestry protections.
+CONFIG_SECURITY=y
+CONFIG_SECURITY_YAMA=y
+
+# Perform usercopy bounds checking. (And disable fallback to gain full whitelist enforcement.)
+CONFIG_HARDENED_USERCOPY=y
+# CONFIG_HARDENED_USERCOPY_FALLBACK is not set
+
+# Randomize allocator freelists, harden metadata.
+CONFIG_SLAB_FREELIST_RANDOM=y
+CONFIG_SLAB_FREELIST_HARDENED=y
+
+# Allow allocator validation checking to be enabled (see "slub_debug=P" below).
+CONFIG_SLUB_DEBUG=y
+
+# Wipe higher-level memory allocations when they are freed (needs "page_poison=1" command line below).
+# (If you can afford even more performance penalty, leave CONFIG_PAGE_POISONING_NO_SANITY=n)
+CONFIG_PAGE_POISONING=y
+CONFIG_PAGE_POISONING_NO_SANITY=y
+CONFIG_PAGE_POISONING_ZERO=y
+
+# Adds guard pages to kernel stacks (not all architectures support this yet).
+CONFIG_VMAP_STACK=y
+
+# Perform extensive checks on reference counting.
+CONFIG_REFCOUNT_FULL=y
+
+# Check for memory copies that might overflow a structure in str*() and mem*() functions both at build-time and run-time.
+CONFIG_FORTIFY_SOURCE=y
+
+# Dangerous; enabling this allows direct physical memory writing.
+CONFIG_ACPI_CUSTOM_METHOD=n
+
+# Dangerous; enabling this disables brk ASLR.
+CONFIG_COMPAT_BRK=n
+
+# Dangerous; enabling this allows direct kernel memory writing.
+CONFIG_DEVKMEM=n
+
+# Dangerous; exposes kernel text image layout.
+CONFIG_PROC_KCORE=n
+
+# Dangerous; enabling this disables VDSO ASLR.
+CONFIG_COMPAT_VDSO=n
+
+# Dangerous; enabling this allows replacement of running kernel.
+CONFIG_KEXEC=n
+
+# Dangerous; enabling this allows replacement of running kernel.
+CONFIG_HIBERNATION=n
+
+# Prior to v4.1, assists heap memory attacks; best to keep interface disabled.
+CONFIG_INET_DIAG=n
+
+# Easily confused by misconfigured userspace, keep off.
+CONFIG_BINFMT_MISC=n
+
+# Use the modern PTY interface (devpts) only.
+CONFIG_LEGACY_PTYS=n
+
+# If SELinux can be disabled at runtime, the LSM structures cannot be read-only; keep off.
+CONFIG_SECURITY_SELINUX_DISABLE=n
+
+# Reboot devices immediately if kernel experiences an Oops.
+CONFIG_PANIC_ON_OOPS=y
+CONFIG_PANIC_TIMEOUT=-1
+
+# Keep root from altering kernel memory via loadable modules.
+CONFIG_MODULES=n
+

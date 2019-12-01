@@ -10,5 +10,5 @@ IPMasquerade=yes
 LLDP=yes
 EmitLLDP=customer-bridge
 
-#[DHCPServer]
-#DNS=8.8.8.8
+[DHCPServer]
+DNS=8.8.8.8 8.8.4.4

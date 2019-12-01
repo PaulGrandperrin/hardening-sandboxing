@@ -33,6 +33,9 @@ systemd-nspawn -D $container -E DEBIAN_FRONTEND=noninteractive apt upgrade -y
 systemd-nspawn -D $container -E DEBIAN_FRONTEND=noninteractive apt dist-upgrade -y
 
 systemd-nspawn -D $container systemctl enable systemd-networkd.service
+systemd-nspawn -D $container systemctl enable systemd-resolved.service
+
+ln -sf /run/systemd/resolve/stub-resolv.conf $container/etc/resolv.conf
 
 mkdir -p /etc/systemd/nspawn/
 #echo "[Network]" > /etc/systemd/nspawn/$name.nspawn
