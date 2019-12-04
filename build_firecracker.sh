@@ -17,6 +17,8 @@ set -xe
 #echo "echo 'nameserver 8.8.8.8' >> /etc/resolv.conf"
 #
 
+apt install -y debootstrap systemd-container
+
 cp microvm/90-microvm.network /etc/systemd/network/
 systemctl enable systemd-networkd
 systemctl restart systemd-networkd
