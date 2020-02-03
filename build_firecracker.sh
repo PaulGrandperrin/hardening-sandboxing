@@ -47,6 +47,6 @@ ln -sf /run/systemd/resolve/stub-resolv.conf $container/etc/resolv.conf
 
 umount mdir
 
-wget https://github.com/firecracker-microvm/firecracker/releases/download/v0.19.0/firecracker-v0.19.0 -O firecracker
+wget https://github.com/firecracker-microvm/firecracker/releases/download/v0.20.0/firecracker-v0.20.0-x86_64 -O firecracker
 chmod +x firecracker
 ./firecracker --no-api --config-file microvm/config.json

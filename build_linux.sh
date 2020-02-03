@@ -9,7 +9,7 @@ else
   cd linux-hardened
 fi
 
-git checkout 5.4
+git checkout 5.5
 
 ./scripts/kconfig/merge_config.sh -m -r -O . ../config-firecracker-4.14.72 ../config-linux-hardened
 make olddefconfig
