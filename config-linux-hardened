@@ -1,3 +1,6 @@
+# from paulg
+CONFIG_IPV6=n
+
 # from linux hardened
 CONFIG_AIO=n
 CONFIG_ARCH_MMAP_RND_BITS=32
