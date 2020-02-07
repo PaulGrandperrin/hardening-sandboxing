@@ -59,24 +59,25 @@ ub_default="$ub_android $ub_int $ub_null $ub_bound"
 
 # PACKAGES
 
-FLAGS="$ub_default" # TODO try to enable some CFI
-export DEB_CFLAGS_APPEND="$FLAGS"
-export DEB_CXXFLAGS_APPEND="$FLAGS"
-export DEB_LDFLAGS_APPEND="$FLAGS"
-build_package openssl
-build_package lz4
-build_package bzip2
-build_package icu
-build_package lua5.3
-
-FLAGS="$cfi $ub_default"
-export DEB_CFLAGS_APPEND="$FLAGS"
-export DEB_CXXFLAGS_APPEND="$FLAGS"
-export DEB_LDFLAGS_APPEND="$FLAGS"
-build_package opensmtpd
-
+#FLAGS="$ub_default" # TODO try to enable some CFI
+#export DEB_CFLAGS_APPEND="$FLAGS"
+#export DEB_CXXFLAGS_APPEND="$FLAGS"
+#export DEB_LDFLAGS_APPEND="$FLAGS"
+#build_package openssl
+#build_package lz4
+#build_package bzip2
+#build_package icu
+#build_package lua5.3
+#
+#FLAGS="$cfi $ub_default"
+#export DEB_CFLAGS_APPEND="$FLAGS"
+#export DEB_CXXFLAGS_APPEND="$FLAGS"
+#export DEB_LDFLAGS_APPEND="$FLAGS"
+#build_package opensmtpd
+#
 FLAGS="$st $cfi $ub_default"
 export DEB_CFLAGS_APPEND="$FLAGS"
 export DEB_CXXFLAGS_APPEND="$FLAGS"
 export DEB_LDFLAGS_APPEND="$FLAGS"
-build_package opensmtpd
+#build_package opensmtpd
+build_package tor
