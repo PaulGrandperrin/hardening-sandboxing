@@ -1,6 +1,8 @@
 #!/bin/sh
 set -xe
 
+apt install -y build-essential 
+
 if [ -d linux-hardened ]; then
   cd linux-hardened
   git fetch
