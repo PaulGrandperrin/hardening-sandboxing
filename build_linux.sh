@@ -1,7 +1,7 @@
 #!/bin/sh
 set -xe
 
-apt install -y build-essential 
+apt install -y build-essential flex bison
 
 if [ -d linux-hardened ]; then
   cd linux-hardened
