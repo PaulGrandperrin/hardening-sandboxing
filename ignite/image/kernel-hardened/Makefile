@@ -7,14 +7,14 @@ all: build
 
 build:
 	docker build \
-		-t paulgdp/ignite-kernel-hardened:${KERNEL_BRANCH}-${STABLE_REF}-${HARDENED_REF} \
-		-t paulgdp/ignite-kernel-hardened:${KERNEL_BRANCH} \
-		-t paulgdp/ignite-kernel-hardened:latest \
+		-t paulgrandperrin/ignite-kernel-hardened:${KERNEL_BRANCH}-${STABLE_REF}-${HARDENED_REF} \
+		-t paulgrandperrin/ignite-kernel-hardened:${KERNEL_BRANCH} \
+		-t paulgrandperrin/ignite-kernel-hardened:latest \
 		--build-arg STABLE_REF=${STABLE_REF} \
 		--build-arg HARDENED_REF=${HARDENED_REF} \
 		.
 
 push: build
 	docker login
-	docker push paulgdp/ignite-kernel-hardened
+	docker push paulgrandperrin/ignite-kernel-hardened
 
