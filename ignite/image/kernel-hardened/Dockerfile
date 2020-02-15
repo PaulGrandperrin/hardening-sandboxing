@@ -1,4 +1,4 @@
-ARG SOURCE=debian:buster
+ARG SOURCE=ubuntu:20.04
 FROM ${SOURCE} AS builder
 
 RUN apt-get update \
