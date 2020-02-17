@@ -1,10 +1,13 @@
+
+RELEASE ?= 20.04
+
 all: build
 
 build:
 	docker build \
-		-t paulgrandperrin/ignite-ubuntu:20.04 \
+		-t paulgrandperrin/ignite-ubuntu:${RELEASE} \
 		-t paulgrandperrin/ignite-ubuntu:latest \
-		--build-arg RELEASE=20.04 \
+		--build-arg RELEASE=${RELEASE} \
 		.
 
 push: build

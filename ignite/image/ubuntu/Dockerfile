@@ -1,5 +1,4 @@
-ARG RELEASE
-
+ARG RELEASE=20.04
 FROM ubuntu:${RELEASE}
 
 # udev is needed for booting a "real" VM, setting up the ttyS0 console properly
