@@ -1,4 +1,4 @@
-KERNEL_BRANCH ?= 5.5
+KERNEL_BRANCH ?= 5.6
 
 GREGKH_REF ?= $(shell git ls-remote --exit-code git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git refs/heads/linux-${KERNEL_BRANCH}.y| cut -c1-12)
 ANTHRAXX_REF ?= $(shell git ls-remote --exit-code https://github.com/anthraxx/linux-hardened.git refs/heads/${KERNEL_BRANCH}| cut -c1-12)
