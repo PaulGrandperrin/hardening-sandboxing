@@ -5,13 +5,9 @@ ANTHRAXX_REF ?= $(shell git ls-remote --exit-code https://github.com/anthraxx/li
 
 all: build
 
-config-firecracker:
+build:
 	curl https://raw.githubusercontent.com/firecracker-microvm/firecracker/master/resources/microvm-kernel-x86_64.config -o config-firecracker
-
-config-ignite:
 	curl https://raw.githubusercontent.com/weaveworks/ignite/master/images/kernel/config-patches -o config-ignite
-
-build: config-firecracker config-ignite
 	docker build \
 		-t paulgrandperrin/ignite-hardened-kernel:${KERNEL_BRANCH}-gregkh_${GREGKH_REF}-anthraxx_${ANTHRAXX_REF} \
 		-t paulgrandperrin/ignite-hardened-kernel:${KERNEL_BRANCH} \
