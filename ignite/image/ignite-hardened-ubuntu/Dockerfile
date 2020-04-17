@@ -31,3 +31,6 @@ RUN sed -i -e 's/^AcceptEnv LANG LC_\*$/#AcceptEnv LANG LC_*/' /etc/ssh/sshd_con
 
 # Set the root password to root when logging in through the VM's ttyS0 console
 RUN echo "root:root" | chpasswd
+
+# Copy hardened sysctls from KSPP
+COPY sysctl-kspp.conf /usr/lib/sysctl.d/
