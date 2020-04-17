@@ -8,7 +8,10 @@ all: build
 config-firecracker:
 	curl https://raw.githubusercontent.com/firecracker-microvm/firecracker/master/resources/microvm-kernel-x86_64.config -o config-firecracker
 
-build: config-firecracker
+config-ignite:
+	curl https://raw.githubusercontent.com/weaveworks/ignite/master/images/kernel/config-patches -o config-ignite
+
+build: config-firecracker config-ignite
 	docker build \
 		-t paulgrandperrin/ignite-hardened-kernel:${KERNEL_BRANCH}-gregkh_${GREGKH_REF}-anthraxx_${ANTHRAXX_REF} \
 		-t paulgrandperrin/ignite-hardened-kernel:${KERNEL_BRANCH} \
@@ -22,4 +25,4 @@ push: build
 	docker push paulgrandperrin/ignite-hardened-kernel
 
 clean:
-	rm -rf config-firecracker
+	rm -rf config-firecracker config-ignite

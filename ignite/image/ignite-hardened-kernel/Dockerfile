@@ -25,7 +25,7 @@ RUN git config --global user.email ${GIT_EMAIL} && git config --global user.name
 	&& git checkout -b hardened ${ANTHRAXX_REF} && git rebase ${GREGKH_REF}
 
 COPY config-* ./
-RUN ./scripts/kconfig/merge_config.sh -m -r -O . config-firecracker config-hardened config-other \
+RUN ./scripts/kconfig/merge_config.sh -m -r -O . config-firecracker config-ignite config-kspp config-other \
 	&& make olddefconfig \
 	&& make vmlinux -j8
 
